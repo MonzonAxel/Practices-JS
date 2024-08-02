@@ -4,10 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
-    <title>Document</title>
+    <title>Piedra, Papel o Tijeras</title>
 </head>
 <body>
+    <header class="header">
+        <h1>Piedra, Papel o Tijera</h1>
+    </header>
+    <main class="main">
+        <p class="texto-inicio">¡El mejor de 10 será el ganador!</p>
+
+        <section class="wrapper">
+            <div class="progress-player">
+                <div class="progress-player-health">
+                    VidaHumana
+                </div>
+            </div>
+                <span>VS</span>
+            <div class="progress-pc">
+                <div class="progress-pc-health">
+                    VidaCibernitica
+                </div>
+            </div>
+        </section>
     
+        <div class="tablero">
+            <p class="jugador">Jugador</p>
+            <span class="result-player equal">0</span>
+            <span class="equal">-</span>
+            <span class="result-pc equal">0</span>
+            <p class="computadora">Computadora</p>
+        </div>
+
+        <div class="container-armas">
+            <p class="armas-select">Selecciona tu poderosa arma</p>
+            <div class="armamento">
+                <i id="piedra" class="fa-solid fa-hand-back-fist f"></i>
+                <i id="papel" class="fa-solid fa-hand f"></i>
+                <i id="tijera"class="fa-solid fa-hand-scissors f"></i>
+            </div>
+        </div>
+
+        <div class="info hidden">
+            <p class="info-player">Jugador selecciono:
+                <span class="span-player">
+
+                </span>
+                
+            </p>
+            <p class="info-pc">Computadora selecciono:
+                <span class="span-pc">
+                    
+                </span>
+                
+            </p>
+            <p class="final ">¡Has perdido esta ronda!</p>
+        </div>
+        <button class="btn hidden"> Reiniciar Juego</button>
+
+    </main>
+    
+    <script src="https://kit.fontawesome.com/f3455718a3.js" crossorigin="anonymous"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>

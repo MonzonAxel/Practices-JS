@@ -1,0 +1,143 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Poppins" , sans-serif;
+    height: 100vh;
+    background-color: rgb(192, 171, 52);
+    
+
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    background-color:rgb(61, 57, 37);
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    padding: 2rem;
+    color: rgb(227, 209, 209);
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.texto-inicio{
+    padding: 1rem;
+    font-weight: 600;
+}
+
+.wrapper{
+    display: flex;
+}
+
+.tablero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(61, 57, 37);
+    padding: 2.4rem;
+    border-radius: 2rem;
+    position: relative;
+    font-weight: 600;
+}
+
+.jugador{
+    position: absolute;
+    width: 120px;
+    text-align: center;
+    right: 85%;  
+}
+
+.computadora{
+    position: absolute;
+    left: 85%;
+}
+
+.jugador, .computadora{
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.2rem;
+    border: 1px solid rgb(61, 57, 37);
+}
+.equal{
+  margin-inline: 10px;
+  font-size: 1.2rem;
+  color: rgb(227, 209, 209);
+}
+
+.container-armas{
+    display: flex;
+    flex-direction: column;
+}
+
+.armas-select{
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.armamento{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-solid{
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.f:hover{
+    background-color: rgb(227, 209, 209);
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(130, 130, 173, 0.152);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.info-player, .info-pc, .final{
+    margin-left: 1rem;
+}
+
+.final{
+    padding-top: 1rem;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Poppins" , sans-serif;
+}
+
+.btn:hover{
+    background-color: rgb(227, 209, 209);
+}
