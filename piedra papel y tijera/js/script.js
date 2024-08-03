@@ -26,8 +26,11 @@ const init = () => {
     weapons.forEach(res => {
         res.addEventListener("click", (e) =>{
             const valor = e.currentTarget.id
+            const valorPc = Math.floor(Math.random()* 3);
+            const valorPcFinal = array[valorPc]
 
-            initial(valor)
+            roundWinner(valor,valorPcFinal)
+            setTurn(valor,valorPcFinal)
             setHealth()
             const winner = checkAWinner()
             if(winner) button.classList.remove("hidden")
@@ -37,15 +40,10 @@ const init = () => {
 }
 
 
-const initial = (valor) => {
-    const valorPc = Math.floor(Math.random()* 3);
-    const valorPcFinal = array[valorPc]
+const roundWinner = (valor,valorPcFinal) => {
+    
 
     info.classList.remove("hidden")
-
-    setTurn(valor,valorPcFinal)
-
-    console.log(valorPcFinal)
 
     if(valor === valorPcFinal){
         return final.textContent= "¡Hubo un empate!"
@@ -56,77 +54,47 @@ const initial = (valor) => {
 
         final.textContent= "¡Ganaste esta ronda!";
         contadorPlayer++
-        resultPlayer.textContent = contadorPlayer
+        updateScore(resultPlayer, contadorPlayer)
 
     }else{
         final.textContent="¡Perdiste esta ronda!";
         contadorPc++
-        resultPc.textContent = contadorPc
+        updateScore(resultPc, contadorPc)
     }
 
+}
+
+const updateScore = (valor,contador) => {
+    valor.textContent= contador
 }
 
 const setTurn = (valor,valorPcFinal) => {
 
+    spanPlayer.innerHTML = getResult(valor)
+    spanPc.innerHTML = getResult(valorPcFinal)
 
-    if(valor === "piedra"){
-        spanPlayer.innerHTML=`<i class="fa-solid fa-hand-back-fist"></i>`
-    }else if (valor === "papel"){
-        spanPlayer.innerHTML=`<i class="fa-solid fa-hand"></i>`
-    }else{
-        spanPlayer.innerHTML=`<i class="fa-solid fa-hand-scissors"></i>`
-    }
-    
-    if(valorPcFinal === "piedra"){
-        spanPc.innerHTML=`<i  class="fa-solid fa-hand-back-fist"></i>`
-    }else if (valorPcFinal === "papel"){
-        spanPc.innerHTML=`<i  class="fa-solid fa-hand"></i>`
-    }else{
-        spanPc.innerHTML=`<i class="fa-solid fa-hand-scissors"></i>`
-    }
+}
 
+const getResult = (option) => {
+   if(option === "piedra") return `<i class="fa-solid fa-hand-back-fist"></i>`
+   if(option === "papel") return `<i class="fa-solid fa-hand"></i>`
+   return `<i class="fa-solid fa-hand-scissors"></i>`
 }
 
 const setHealth = () =>{
-    
-    if(contadorPlayer === 1){
-        pcHealth.style.width = 80+"%"
-    }else if (contadorPlayer === 2){
-        pcHealth.style.width = 60+"%"
-    }else if (contadorPlayer === 3) {
-        pcHealth.style.width = 40+"%"
-    }else if (contadorPlayer === 4) {
-        pcHealth.style.width = 20+"%"
-    }else if(contadorPlayer === 5){
-        pcHealth.style.width = 0+"%"
-    }
 
-    if(contadorPc === 1){
-        playerHealth.style.width = 80+"%"
-    }else if (contadorPc === 2){
-        playerHealth.style.width = 60+"%"
-    }else if (contadorPc === 3) {
-        playerHealth.style.width = 40+"%"
-    }else if (contadorPc === 4) {
-        playerHealth.style.width = 20+"%"
-    }else if (contadorPc === 5){
-        playerHealth.style.width = 0+"%"
-    }
+    pcHealth.style.width = (100 - contadorPlayer * 20) + "%"
+    playerHealth.style.width = (100 - contadorPc * 20) + "%"
+    
 }
 
 const checkAWinner = () =>{
-    if(contadorPc === 5){
-        textoInicial.textContent="!LA MAQUINA GANA!"
+    if(contadorPc === 5 || contadorPlayer === 5){
+        textoInicial.textContent= contadorPlayer === 5 ? "¡EL HUMANO GANO!" : "¡LA MAQUINA GANO!"
         containerArmas.classList.add("hidden")
         return true
-    } 
-    
-    if(contadorPlayer === 5){
-        textoInicial.textContent="¡EL HUMANO GANO!"
-        containerArmas.classList.add("hidden")
-        return true
-    } 
-
+    }
+    return false 
 }
 
 button.addEventListener("click", () => {
