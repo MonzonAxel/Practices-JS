@@ -20,9 +20,7 @@ body{
     display: flex;
     justify-content: center;
     background-color:rgb(61, 57, 37);
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-    padding: 2rem;
+    padding: 0.9rem;
     color: rgb(227, 209, 209);
 }
 
@@ -56,12 +54,14 @@ body{
     position: absolute;
     width: 120px;
     text-align: center;
-    right: 85%;  
+    right: 85%;
+    bottom: 68%;  
 }
 
 .computadora{
     position: absolute;
     left: 85%;
+    bottom: 68%; 
 }
 
 .jugador, .computadora{
@@ -140,4 +140,53 @@ body{
 
 .btn:hover{
     background-color: rgb(227, 209, 209);
+}
+
+.wrapper{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 365px;
+}
+
+.progress-player {
+    width: 100%;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px 0;
+    height: 20px;
+
+}
+
+.progress-player-health {
+    height: 100%;
+    width: 100%;
+    background-color: #4caf50;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-pc {
+    width: 100%;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px 0;
+    height: 20px;
+
+}
+
+.progress-pc-health {
+    height: 100%;
+    width: 100%;
+    background-color: #4caf50;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+.versus{
+    padding: 1.5rem;
+    font-weight: 600;
 }

@@ -1,15 +1,21 @@
 const textoInicial = document.querySelector(".texto-inicio")
+
 const resultPlayer = document.querySelector(".result-player")
 const resultPc = document.querySelector(".result-pc")
+
+const playerHealth = document.querySelector(".progress-player-health")
+const pcHealth = document.querySelector(".progress-pc-health")
+
 const containerArmas = document.querySelector(".container-armas")
 const weapons = document.querySelectorAll(".f")
-const button = document.querySelector(".btn")
 
 const spanPlayer = document.querySelector(".span-player")
 const spanPc = document.querySelector(".span-pc")
 
 const info = document.querySelector(".info")
 const final = document.querySelector(".final")
+const button = document.querySelector(".btn")
+
 
 let contadorPlayer = 0;
 let contadorPc = 0;
@@ -22,6 +28,7 @@ const init = () => {
             const valor = e.currentTarget.id
 
             initial(valor)
+            setHealth()
             const winner = checkAWinner()
             if(winner) button.classList.remove("hidden")
 
@@ -57,7 +64,6 @@ const initial = (valor) => {
         resultPc.textContent = contadorPc
     }
 
-
 }
 
 const setTurn = (valor,valorPcFinal) => {
@@ -79,6 +85,33 @@ const setTurn = (valor,valorPcFinal) => {
         spanPc.innerHTML=`<i class="fa-solid fa-hand-scissors"></i>`
     }
 
+}
+
+const setHealth = () =>{
+    
+    if(contadorPlayer === 1){
+        pcHealth.style.width = 80+"%"
+    }else if (contadorPlayer === 2){
+        pcHealth.style.width = 60+"%"
+    }else if (contadorPlayer === 3) {
+        pcHealth.style.width = 40+"%"
+    }else if (contadorPlayer === 4) {
+        pcHealth.style.width = 20+"%"
+    }else if(contadorPlayer === 5){
+        pcHealth.style.width = 0+"%"
+    }
+
+    if(contadorPc === 1){
+        playerHealth.style.width = 80+"%"
+    }else if (contadorPc === 2){
+        playerHealth.style.width = 60+"%"
+    }else if (contadorPc === 3) {
+        playerHealth.style.width = 40+"%"
+    }else if (contadorPc === 4) {
+        playerHealth.style.width = 20+"%"
+    }else if (contadorPc === 5){
+        playerHealth.style.width = 0+"%"
+    }
 }
 
 const checkAWinner = () =>{
@@ -107,6 +140,8 @@ button.addEventListener("click", () => {
     spanPlayer.innerHTML=""
     spanPc.innerHTML=""
     info.classList.add("hidden")
+    playerHealth.style.width = 100+"%"
+    pcHealth.style.width = 100+"%"
 
 })
 
