@@ -108,9 +108,7 @@ button.addEventListener("click", () => {
     spanPlayer.innerHTML=""
     spanPc.innerHTML=""
     info.classList.add("hidden")
-    playerHealth.style.width = 100+"%"
-    pcHealth.style.width = 100+"%"
-
+    setHealth()
 })
 
 init()
