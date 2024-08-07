@@ -179,7 +179,7 @@ const checkWinner = () =>{
     }
 }
 
-
+//Duracion del juego 
 const addTime = () => {
     state.time=60;
     state.interval = setInterval(()=>{
@@ -193,6 +193,7 @@ const addTime = () => {
     },1000)
 }
 
+//Revela todas las cartas si se acaba el tiempo
 const revealCard = () => {
     document.querySelectorAll(".card").forEach(res =>{
         res.classList.add("flipped")
@@ -249,18 +250,12 @@ const selectLevel = (value) =>{
 
 selectors.filter.addEventListener("change", (e) =>{
 
-    resetStatistic()
     const value=selectors.filter.value
-    hiddenPlayAndResult()
-    selectLevel(value)
-    
-    
+
+    //Mientras el juego transcurre se PUEDE cambiar de difultad, pero al inicio y al finalizar el juego SOLO se reactiva al darle play.
+
+    if(selectors.play.classList.contains("hidden")){
+        resetStatistic()
+        selectLevel(value)
+    }   
 })
-
-const hiddenPlayAndResult = () =>{
-    if(!selectors.play.classList.contains("hidden") && !selectors.result.classList.contains("hidden")){
-        selectors.play.classList.add("hidden")
-        selectors.result.classList.add("hidden")
-    }
-
-}
