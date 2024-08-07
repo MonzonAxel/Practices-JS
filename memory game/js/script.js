@@ -44,11 +44,13 @@ const imgHard = [
 ]
 
 const selectors = {
+    main:document.querySelector(".wrapped"),
     game:document.querySelector(".game-container"),
     moves:document.querySelector(".moves"),
     time:document.querySelector(".time"),
     success:document.querySelector(".success"),
-    play:document.querySelector(".play")
+    play:document.querySelector(".play"),
+    result:document.querySelector(".result")
 }
 
 const state = {
@@ -63,9 +65,11 @@ let firstCard
 let secondCard
 let firstCardValue
 let secondCardValue
+let dimension
 
 const initial = () => {
     const items = ramdonArray([...imgEasy,...imgEasy])
+    dimension = items.length
     createBoard(items)
     addTime()
     
@@ -100,53 +104,54 @@ const createBoard = (items) => {
         selectors.game.insertAdjacentHTML("beforeend", element)
     })
     const card = document.querySelectorAll(".card")
-    flipCard(card)
+    cardList(card)
 }
 
-const flipCard = (card) =>{
+const cardList = (card) =>{
     card.forEach(res => {
         res.addEventListener("click", (e) => {
             state.flippedCards++
-            const prueba = e.target
-            const prueba2 = prueba.parentElement
-            console.log(prueba)
-            console.log(prueba2)
-
-            //Posible linea salvadora
-            // if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
-            //     flipCard(eventParent)
-            // }
-
-            if(!res.classList.contains("matched")) {
-                res.classList.add("flipped")
-
-                if(state.flippedCards == 1){
-                    firstCard = res
-                    firstCardValue = res.getAttribute("data-card-value") 
-                
-                }else{
-                    
-                    secondCard = res
-                    secondCardValue = res.getAttribute("data-card-value")
-                    movesCounter()
-                   
-                    if(firstCardValue == secondCardValue){
-
-                        firstCard.classList.add("matched")
-                        secondCard.classList.add("matched")
-                        state.flippedCards = 0
-                        success()
-
-                    }else{
-                        setTimeout(()=>{
-                            backFlip()
-                        },800)
-                    }
-                }
-            }
+            const eventTarget = e.target
+            const eventParent = eventTarget.parentElement
+    
             
+            if (eventTarget.className.includes("card-before") && !eventParent.className.includes('flipped')) {
+                flipCard(eventParent)
+            }
         })
     })
+}
+
+const flipCard = (res) =>{
+
+    if(!res.classList.contains("matched")) {
+        res.classList.add("flipped")
+
+        if(state.flippedCards == 1){
+            firstCard = res
+            firstCardValue = res.getAttribute("data-card-value") 
+        
+        }else{
+            
+            secondCard = res
+            secondCardValue = res.getAttribute("data-card-value")
+            movesCounter()
+           
+            if(firstCardValue == secondCardValue){
+
+                firstCard.classList.add("matched")
+                secondCard.classList.add("matched")
+                state.flippedCards = 0
+                success()
+                checkWinner()
+
+            }else{
+                setTimeout(()=>{
+                    backFlip()
+                },600)
+            }
+        }
+    }
 }
 
 const backFlip = () => {
@@ -165,27 +170,65 @@ const success = () => {
     selectors.success.textContent = `Aciertos : ${++state.success}`
 }
 
+const checkWinner = () =>{
+    if((state.success / (dimension / 2 )) === 1 ){
+        clearInterval(state.interval)
+        winner()
+    }
+}
+
 
 const addTime = () => {
     state.interval = setInterval(()=>{
         state.time--
         selectors.time.textContent=`Tiempo: ${state.time} sec`
         if(state.time === 0){
-            selectors.time.textContent=`Out of time`
+
             clearInterval(state.interval)
-            // resetGame()
+            revealCard()
         }
     },1000)
 }
 
-const resetGame = () => {
+const revealCard = () => {
+    document.querySelectorAll(".card").forEach(res =>{
+        res.classList.add("flipped")
+        setTimeout(()=>{
+            defeat()
+        },1000)
+    })
+}
+
+const defeat = () => {
+    selectors.main.classList.add("hidden")
+    selectors.result.classList.remove("hidden")
+    selectors.result.textContent = "¡Has perdido! Intentalo nuevamente"
+    selectors.play.classList.remove("hidden")
+}
+
+const winner = () =>{
+    
+    selectors.result.textContent = "¡ Has ganado !"
+    selectors.result.classList.remove("hidden")
+    selectors.play.textContent= "Play Again"
+    selectors.play.classList.remove("hidden")
+}
+
+const resetStatistic = () => {
     state.flippedCards=0
     state.totalFlip=0
     state.time=60
     state.interval=null
     selectors.moves.textContent ="Movimientos : "
     selectors.success.textContent = "Aciertos : "
-    initial()
 }
 
-initial ()
+
+selectors.play.addEventListener("click" , () =>{
+    resetStatistic()
+    selectors.main.classList.remove("hidden")
+    selectors.result.classList.add("hidden")
+    selectors.play.classList.add("hidden")
+    
+    initial()
+})

@@ -10,15 +10,14 @@
     <header class="header">
         <h1>Memory Game</h1>
         <select name="levels" id="filter">
-            <option value="" disabled selected >Niveles</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
     </header>
-    <main class="wrapped">
-        <button class="play">Play</button>
-        <section class="stats hidden">
+    <button class="play">Play</button>
+    <main class="wrapped hidden">    
+        <section class="stats ">
             <div class="left">
                 <div class="moves">Movimientos :</div>
             </div>
@@ -28,10 +27,10 @@
             </div>
         </section>
         
-        <section class="game-container hidden">
-            
+        <section class="game-container">
         </section>
     </main>
+    <p class="result hidden">Has ganado o has perdido</p>
 
     <script src="js/script.js"></script>
 </body>
