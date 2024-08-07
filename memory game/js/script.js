@@ -251,16 +251,16 @@ selectors.filter.addEventListener("change", (e) =>{
 
     resetStatistic()
     const value=selectors.filter.value
-    selectLevel(value)
     hiddenPlayAndResult()
+    selectLevel(value)
+    
     
 })
 
 const hiddenPlayAndResult = () =>{
-    if(!selectors.play.classList.contains("hidden")){
+    if(!selectors.play.classList.contains("hidden") && !selectors.result.classList.contains("hidden")){
         selectors.play.classList.add("hidden")
-    }
-    if(!selectors.result.classList.contains("hidden")){
         selectors.result.classList.add("hidden")
     }
+
 }
