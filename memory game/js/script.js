@@ -58,7 +58,7 @@ const state = {
     flippedCards:0,
     totalFlip:0,
     success:0,
-    time:10,
+    time:60,
     interval:null,
 }
 
@@ -69,8 +69,8 @@ let secondCardValue
 let dimension
 
 const initial = (imgItem) => {
+    clearInterval(state.interval);
     const items = ramdonArray([...imgItem,...imgItem])
-    console.log(items)
     dimension = items.length
     createBoard(items)
     addTime()
@@ -150,7 +150,7 @@ const flipCard = (res) =>{
             }else{
                 setTimeout(()=>{
                     backFlip()
-                },600)
+                },450)
             }
         }
     }
@@ -181,6 +181,7 @@ const checkWinner = () =>{
 
 
 const addTime = () => {
+    state.time=60;
     state.interval = setInterval(()=>{
         state.time--
         selectors.time.textContent=`Tiempo: ${state.time} sec`
@@ -202,25 +203,24 @@ const revealCard = () => {
 }
 
 const defeat = () => {
-    selectors.main.classList.add("hidden")
+    
     selectors.result.classList.remove("hidden")
     selectors.result.textContent = "¡Has perdido! Intentalo nuevamente"
     selectors.play.classList.remove("hidden")
+    selectors.play.textContent= "Play Again"
 }
 
 const winner = () =>{
     
     selectors.result.textContent = "¡ Has ganado !"
     selectors.result.classList.remove("hidden")
-    selectors.play.textContent= "Play Again"
     selectors.play.classList.remove("hidden")
 }
 
 const resetStatistic = () => {
     state.flippedCards=0
     state.totalFlip=0
-    state.time=60
-    state.interval=null
+    state.success=0
     selectors.moves.textContent ="Movimientos : "
     selectors.success.textContent = "Aciertos : "
 }
@@ -248,14 +248,19 @@ const selectLevel = (value) =>{
 }
 
 selectors.filter.addEventListener("change", (e) =>{
-    const value=selectors.filter.value
+
     resetStatistic()
-    if(value === "easy"){
-        initial(imgEasy)
-    }else if ( value === "medium"){
-        initial(imgMedium)
-    }else{
-        initial(imgHard)
-    }
-    clearInterval(state.interval)
+    const value=selectors.filter.value
+    selectLevel(value)
+    hiddenPlayAndResult()
+    
 })
+
+const hiddenPlayAndResult = () =>{
+    if(!selectors.play.classList.contains("hidden")){
+        selectors.play.classList.add("hidden")
+    }
+    if(!selectors.result.classList.contains("hidden")){
+        selectors.result.classList.add("hidden")
+    }
+}

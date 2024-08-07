@@ -50,11 +50,11 @@ background-color: rgb(215, 246, 246);
     display: flex;
     align-items: center;
     flex-direction: column;
-    min-width: 275px;
+    min-width: 360px;
     max-width: 500px;
     margin: 0 auto;
     background-color: rgb(240, 227, 208);
-    margin-top: 5rem;
+    margin-top: 1rem;
     padding: 1rem;
     border-radius: 1rem;
 }
