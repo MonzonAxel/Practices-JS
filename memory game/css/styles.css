@@ -112,7 +112,7 @@ font-family: "Poppins", sans-serif;
 
 .card-before {
     background-color: rgb(44, 47, 47);
-    font-size: 5em;
+    font-size: 3.5rem;
     font-weight: 600;
     transform: rotateY(0deg);
     color: white;
@@ -152,7 +152,7 @@ font-family: "Poppins", sans-serif;
       font-size: 0.9rem;
     }
     .card-before{
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
     #filter{
       width: 6rem;
