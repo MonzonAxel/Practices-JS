@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -10,6 +12,7 @@ img{
 
 body{
 background-color: rgb(215, 246, 246);
+font-family: "Poppins", sans-serif;
 }
 
 .header{
@@ -34,7 +37,7 @@ background-color: rgb(215, 246, 246);
 
 .play{
     position: absolute;
-    top: 60%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%,-50%);
     padding: 1rem;
@@ -51,7 +54,7 @@ background-color: rgb(215, 246, 246);
     align-items: center;
     flex-direction: column;
     min-width: 360px;
-    max-width: 500px;
+    max-width: 430px;
     margin: 0 auto;
     background-color: rgb(240, 227, 208);
     margin-top: 1rem;
@@ -61,8 +64,8 @@ background-color: rgb(215, 246, 246);
 
 .stats{
     display: flex;
-   
-    padding: 0.5rem;
+   font-weight: 600;
+   padding-bottom: 0.5rem;
     justify-content: space-between;
     align-items: center;
     width:100%
@@ -80,7 +83,7 @@ background-color: rgb(215, 246, 246);
     position: relative;
     width: 100%;
     display: grid;
-    gap:0.6rem;
+    gap:0.2rem;
     grid-template-columns: repeat(4,1fr);
 }
 
@@ -141,4 +144,26 @@ background-color: rgb(215, 246, 246);
 
   .hidden{
     display: none;
+  }
+
+
+  @media (width <= 440px){
+    .header{
+      font-size: 0.9rem;
+    }
+    .card-before{
+      font-size: 3rem;
+    }
+    #filter{
+      width: 6rem;
+    }
+    .wrapped{
+      min-width: 260px;
+    }
+    .card{
+      height: 59px;
+    }
+    img{
+      width: 2.8rem;
+    }
   }

@@ -1,12 +1,12 @@
 const imgEasy = [
-    {name:"facebook",image:"./img/facebook.webp" ,id:"facebook"},
-    {name:"github",image:"./img/github.webp" ,id:"facebook"},
-    {name:"instagram",image:"./img/instagram.webp" ,id:"facebook"},
-    {name:"itunes",image:"./img/itunes.webp" ,id:"facebook"},
-    {name:"linkedin",image:"./img/linkedin.webp" ,id:"facebook"} ,
-    {name:"messenger",image:"./img/messenger.webp" ,id:"facebook"},
-    {name:"reddit",image:"./img/reddit.webp" ,id:"facebook"},
-    {name:"skype",image:"./img/skype.webp" ,id:"facebook"},
+    {name:"facebook",image:"./img/facebook.webp"},
+    {name:"github",image:"./img/github.webp"},
+    {name:"instagram",image:"./img/instagram.webp"},
+    {name:"itunes",image:"./img/itunes.webp"},
+    {name:"linkedin",image:"./img/linkedin.webp"} ,
+    {name:"messenger",image:"./img/messenger.webp"},
+    {name:"reddit",image:"./img/reddit.webp"},
+    {name:"skype",image:"./img/skype.webp"},
 ]
 
 const imgMedium = [
@@ -68,6 +68,8 @@ let firstCardValue
 let secondCardValue
 let dimension
 
+let audioFlip = new Audio("./audio/girar.wav")
+
 const initial = (imgItem) => {
     clearInterval(state.interval);
     const items = ramdonArray([...imgItem,...imgItem])
@@ -112,6 +114,7 @@ const createBoard = (items) => {
 const cardList = (card) =>{
     card.forEach(res => {
         res.addEventListener("click", (e) => {
+
             state.flippedCards++
             const eventTarget = e.target
             const eventParent = eventTarget.parentElement
@@ -125,7 +128,7 @@ const cardList = (card) =>{
 }
 
 const flipCard = (res) =>{
-
+    audioFlip.play()
     if(!res.classList.contains("matched")) {
         res.classList.add("flipped")
 
@@ -179,7 +182,7 @@ const checkWinner = () =>{
     }
 }
 
-//Duracion del juego 
+//Game duration
 const addTime = () => {
     state.time=60;
     state.interval = setInterval(()=>{
@@ -222,8 +225,8 @@ const resetStatistic = () => {
     state.flippedCards=0
     state.totalFlip=0
     state.success=0
-    selectors.moves.textContent ="Movimientos : "
-    selectors.success.textContent = "Aciertos : "
+    selectors.moves.textContent ="Movimientos : 0 "
+    selectors.success.textContent = "Aciertos : 0 "
 }
 
 
@@ -252,7 +255,7 @@ selectors.filter.addEventListener("change", (e) =>{
 
     const value=selectors.filter.value
 
-    //Mientras el juego transcurre se PUEDE cambiar de difultad, pero al inicio y al finalizar el juego SOLO se reactiva al darle play.
+    //Mientras el juego transcurre se PUEDE cambiar de difultad, pero al inicio y al finalizar el juego SOLO se recomienza al darle play.
 
     if(selectors.play.classList.contains("hidden")){
         resetStatistic()
