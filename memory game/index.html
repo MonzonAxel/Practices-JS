@@ -7,32 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Memory Game</h1>
         <select name="levels" id="filter">
             <option value="" disabled selected >Niveles</option>
             <option value="easy">Easy</option>
-            <option value="normal">Normal</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
     </header>
     <main class="wrapped">
-        <section class="stats">
-            <div class="moves">Movimientos</div>
-            <div class="pairs">Parejas restantes</div>
-            <div class="time">Tiempo</div>
+        <button class="play">Play</button>
+        <section class="stats hidden">
+            <div class="left">
+                <div class="moves">Movimientos :</div>
+            </div>
+            <div class="rigth">
+                <div class="time">Tiempo</div>
+                <div class="success">Aciertos :</div>
+            </div>
         </section>
-        <section class="container-gamer">
-            <div class="board-gamer">
-                <div class="card">
-                    <div>Imagen frontal</div>
-                    <div>Imagen trasera</div>
-                </div>
-            </div>
-            <div class="result">
-                Ganaste o perdiste
-            </div>
+        
+        <section class="game-container hidden">
+            
         </section>
     </main>
 
