@@ -10,18 +10,18 @@ const imgEasy = [
 ]
 
 const imgMedium = [
-    {name:"facebook",image:"../img/facebook.webp"},
-    {name:"github",image:"../img/github.webp"},
-    {name:"instagram",image:"../img/instagram.webp"},
-    {name:"itunes",image:"../img/itunes.webp"},
-    {name:"linkedin",image:"../img/linkedin.webp"},
-    {name:"messenger",image:"../img/messenger.webp"},
-    {name:"reddit",image:"../img/reddit.webp"},
-    {name:"skype",image:"../img/skype.webp"},
-    {name:"spotify",image:"../img/spotify.webp"},
-    {name:"steam",image:"../img/steam.webp"},
-    {name:"telegram",image:"../img/telegram.webp"},
-    {name:"tiktok",image:"../img/tik-tok.webp"}
+    {name:"facebook",image:"./img/facebook.webp"},
+    {name:"github",image:"./img/github.webp"},
+    {name:"instagram",image:"./img/instagram.webp"},
+    {name:"itunes",image:"./img/itunes.webp"},
+    {name:"linkedin",image:"./img/linkedin.webp"},
+    {name:"messenger",image:"./img/messenger.webp"},
+    {name:"reddit",image:"./img/reddit.webp"},
+    {name:"skype",image:"./img/skype.webp"},
+    {name:"spotify",image:"./img/spotify.webp"},
+    {name:"steam",image:"./img/steam.webp"},
+    {name:"telegram",image:"./img/telegram.webp"},
+    {name:"tiktok",image:"./img/tik-tok.webp"}
 ]
 
 const imgHard = [
@@ -50,7 +50,8 @@ const selectors = {
     time:document.querySelector(".time"),
     success:document.querySelector(".success"),
     play:document.querySelector(".play"),
-    result:document.querySelector(".result")
+    result:document.querySelector(".result"),
+    filter:document.querySelector("#filter")
 }
 
 const state = {
@@ -67,8 +68,9 @@ let firstCardValue
 let secondCardValue
 let dimension
 
-const initial = () => {
-    const items = ramdonArray([...imgEasy,...imgEasy])
+const initial = (imgItem) => {
+    const items = ramdonArray([...imgItem,...imgItem])
+    console.log(items)
     dimension = items.length
     createBoard(items)
     addTime()
@@ -230,5 +232,30 @@ selectors.play.addEventListener("click" , () =>{
     selectors.result.classList.add("hidden")
     selectors.play.classList.add("hidden")
     
-    initial()
+    const value = selectors.filter.value
+    selectLevel(value)
+
+})
+
+const selectLevel = (value) =>{
+    if(value === "easy"){
+        initial(imgEasy)
+    }else if ( value === "medium"){
+        initial(imgMedium)
+    }else{
+        initial(imgHard)
+    }
+}
+
+selectors.filter.addEventListener("change", (e) =>{
+    const value=selectors.filter.value
+    resetStatistic()
+    if(value === "easy"){
+        initial(imgEasy)
+    }else if ( value === "medium"){
+        initial(imgMedium)
+    }else{
+        initial(imgHard)
+    }
+    clearInterval(state.interval)
 })
