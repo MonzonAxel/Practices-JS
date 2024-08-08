@@ -216,7 +216,7 @@ const defeat = () => {
 
 const winner = () =>{
     
-    selectors.result.textContent = "¡ Has ganado !"
+    selectors.result.textContent = "¡Has ganado!"
     selectors.result.classList.remove("hidden")
     selectors.play.classList.remove("hidden")
 }
