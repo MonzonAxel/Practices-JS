@@ -10,8 +10,11 @@
     <main class="wrapped">
         <section class="weather-top">
             <div class="weather-img">
-                <img src="" alt="Icon">
-                <p>27°</p>
+                <img class="img" alt="Icon">
+                <p  class="temperature"></p>
+            </div>
+            <div class="weather-description">
+                <p class="description"></p>
             </div>
             <div class="weather-container-info">
                 <div class="weather-icon">
@@ -23,107 +26,23 @@
                     
                 </div>
                 <div class="weather-info-text">
-                    <p class="weather-info-nation">Pais:Argentina</p>
-                    <p class="weather-info-region">Region:Buenos Aires</p>
-                    <p class="weather-info-wind">Viento: 27km/h</p>
-                    <p class="weather-info-humidity">Humedad:85%</p>
-                    <p class="weather-info-cloud">Nubes:2%</p>
+                    <p class="weather-info-nation"></p>
+                    <p class="weather-info-region"></p>
+                    <p class="weather-info-wind"></p>
+                    <p class="weather-info-humidity"></p>
+                    <p class="weather-info-clouds"></p>
                 </div>  
             </div>
         </section>
         <section class="weather-bottom">
             <p class="search-title">Busqueda:</p>
             <div class="search">
-                <input class="input" type="text" placeholder="Buscar pais o ciudad">
+                <input class="input" type="text" placeholder="Buscar ciudad en su idioma nativo">
                 <button class="btn">Buscar</button>
             </div>
-            <p class="extend">Pronostico Extendido en Quilmes</p>
+            <p class="extend">Pronostico Extendido en <span class="span-city">Quilmes</span></p>
             <div class="container-extend">
-                <article class="days-extend">
-                    <p class="extend-day">Dia</p>
-                    <p class="extend-date">Fecha</p>
-                    <img class="extend-img" alt="Icon">
-                    <div class="weather-info-extend">
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-three-quarters"></i>
-                            <p>T. Max :</p>
-                        </div>
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-empty"></i>
-                            <p>T. Min : </p>
-                        </div>
-                        <div class="flex-eye">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                </article>
-                <article class="days-extend">
-                    <p class="extend-day">Dia</p>
-                    <p class="extend-date">Fecha</p>
-                    <img class="extend-img" alt="Icon">
-                    <div class="weather-info-extend">
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-three-quarters"></i>
-                            <p>T. Max :</p>
-                        </div>
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-empty"></i>
-                            <p>T. Min : </p>
-                        </div>
-                        <div class="flex-eye">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                </article>
-                <article class="days-extend">
-                    <p class="extend-day">Dia</p>
-                    <p class="extend-date">Fecha</p>
-                    <img class="extend-img" alt="Icon">
-                    <div class="weather-info-extend">
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-three-quarters"></i>
-                            <p>T. Max :</p>
-                        </div>
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-empty"></i>
-                            <p>T. Min : </p>
-                        </div>
-                        <div class="flex-eye">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                </article>
-                <article class="days-extend">
-                    <p class="extend-day">Dia</p>
-                    <p class="extend-date">Fecha</p>
-                    <img class="extend-img" alt="Icon">
-                    <div class="weather-info-extend">
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-three-quarters"></i>
-                            <p>T. Max :</p>
-                        </div>
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-empty"></i>
-                            <p>T. Min : </p>
-                        </div>
-                        <div class="flex-eye">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                </article>
-                <article class="days-extend">
-                    <p class="extend-day">Dia</p>
-                    <p class="extend-date">Fecha</p>
-                    <img class="extend-img" alt="Icon">
-                    <div class="weather-info-extend">
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-three-quarters"></i>
-                            <p>T. Max :</p>
-                        </div>
-                        <div class="flex">
-                            <i class="fa-solid fa-temperature-empty"></i>
-                            <p>T. Min : </p>
-                        </div>
-                        <div class="flex-eye">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                </article>
+                <!-- Insert into JS -->
             </div>
         </section>
     </main>
