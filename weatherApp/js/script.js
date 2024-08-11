@@ -2,7 +2,7 @@
 const API_KEY = "4d3fb563f0f4c0f4752ed1adc41ace16"
 
 // Clima promedio 
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=Colombia&appid=${API_KEY}&units=metric&lang=es`)
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=Argentina&appid=${API_KEY}&units=metric&lang=es`)
 .then(res => res.json())
 .then(data => {
     console.log(data)
@@ -11,7 +11,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=Colombia&appid=${API_KE
 
 // Clima de los proximos 5 dias en distintas horas.
 
-fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Quilmes&appid=${API_KEY}&units=metric&lang=es`)
+fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Argentina&appid=${API_KEY}&units=metric&lang=es`)
 .then(res => res.json())
 .then(data => {
     console.log(data)
