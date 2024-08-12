@@ -4,8 +4,9 @@ const API_KEY = "52c5ab5d2a1b49658de194604241108"
 const selectors = {
     input:document.querySelector(".input"),
     btn:document.querySelector(".btn"),
-    view:document.querySelector(".fa-eye"),
-    container:document.querySelector(".container-extend")
+    container:document.querySelector(".container-extend"),
+    close:document.querySelector(".close"),
+    viewMore:document.querySelector(".view-more")
 }
 
 const weatherPrincipal = {
@@ -20,6 +21,10 @@ const weatherPrincipal = {
     name:document.querySelector(".span-city"),
     descriptionExtend:document.querySelector(".extend-description")
 }
+
+let weatherChart = null;
+let forecastChart = null;
+let hour = []
 
 const fetchWeather = (value = "Argentina") =>  {
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${value}&days=3&lang=es`)
@@ -51,8 +56,6 @@ const displayWeather = (data) => {
 
 }
 
-let weatherChart = null;
-
 const displayForecast = (data) =>{
 
     const {forecast:{forecastday}} = data   
@@ -83,13 +86,17 @@ const displayForecast = (data) =>{
                             <p class="temp">T.Min: ${day.day.mintemp_c} °C </p>
                         </div>
                         <div class="flex-eye">
-                            <i class="fa-solid fa-eye"></i>
+                            <a class="link" href="#" data-texto="Ver"><i class="fa-solid fa-eye" id="${i}"></i></a>
                         </div>
                     </article> `
 
         selectors.container.insertAdjacentHTML("beforeend",element)
    }
+
+    const view = document.querySelectorAll(".fa-eye")
+    displayChartHours(view,forecastday)
 }
+
 
 const getDayName = (dateString) => {
     const date = new Date(dateString);
@@ -107,32 +114,31 @@ const displayChart = (data) => {
     
     const {forecast:{forecastday}} = data 
 
-        console.log(forecastday)
         const labels = forecastday.map(day => getDayName(day.date));
-        console.log(labels)
+       
         const maxTemps = forecastday.map(day => day.day.maxtemp_c);
-        console.log(maxTemps)
+      
         const minTemps = forecastday.map(day => day.day.mintemp_c);
-        console.log(minTemps)
+       
 
         weatherChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: labels,
                 datasets: [
                     {
                         label: 'Temperatura Máxima (°C)',
                         data: maxTemps,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132)',
                         fill: true,
                         tension: 0.1
                     },
                     {
                         label: 'Temperatura Mínima (°C)',
                         data: minTemps,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235)',
                         fill: true,
                         tension: 0.1
                     }
@@ -150,6 +156,63 @@ const displayChart = (data) => {
 }
 
 
+const displayChartHours = (view,forecastday) =>{
+    view.forEach(element => {
+        element.addEventListener("click" , (e) =>{
+
+            hour = [];
+
+            selectors.viewMore.classList.remove("hidden")
+
+            const fc = document.getElementById("chart")
+
+            if (forecastChart) {
+                forecastChart.destroy();
+            }
+
+            const value = e.target.id
+            const forecastIndex = forecastday[value]
+
+            const temps = forecastIndex.hour.map(element => element.temp_c)
+            const dates = forecastIndex.hour.map(element =>element.time)
+            
+            for( i=0; i<dates.length; i++){
+                let date = dates[i]
+                let hours = date.split(" ")
+                hour.push(hours[1])
+            }
+
+            
+            forecastChart = new Chart(fc, {
+                type: 'line',
+                data: {
+                    labels: hour,
+                    datasets: [
+                        {
+                            label: "Temperatura promedio",
+                            data: temps,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: false,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+            
+        })
+    });
+}
+
+
+
 selectors.btn.addEventListener("click", () =>{
    const query = selectors.input.value
    fetchWeather(query)
@@ -158,6 +221,10 @@ selectors.btn.addEventListener("click", () =>{
 selectors.input.addEventListener("keydown", (e) =>{
     const query = selectors.input.value
     if (e.key === "Enter") fetchWeather(query) 
+})
+
+selectors.close.addEventListener("click", () => {
+    selectors.viewMore.classList.add("hidden")
 })
 
  fetchWeather()
