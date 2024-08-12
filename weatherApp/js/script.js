@@ -114,7 +114,7 @@ const displayChart = (data) => {
     
     const {forecast:{forecastday}} = data 
 
-        const labels = forecastday.map(day => getDayName(day.date));
+        let labels = forecastday.map(day => getDayName(day.date));
        
         const maxTemps = forecastday.map(day => day.day.maxtemp_c);
       
@@ -131,16 +131,12 @@ const displayChart = (data) => {
                         data: maxTemps,
                         borderColor: 'rgba(255, 99, 132)',
                         backgroundColor: 'rgba(255, 99, 132)',
-                        fill: true,
-                        tension: 0.1
                     },
                     {
                         label: 'Temperatura Mínima (°C)',
                         data: minTemps,
                         borderColor: 'rgba(54, 162, 235)',
                         backgroundColor: 'rgba(54, 162, 235)',
-                        fill: true,
-                        tension: 0.1
                     }
                 ]
             },
@@ -159,6 +155,8 @@ const displayChart = (data) => {
 const displayChartHours = (view,forecastday) =>{
     view.forEach(element => {
         element.addEventListener("click" , (e) =>{
+
+            e.preventDefault(); //Evita comportamiento por defecto
 
             hour = [];
 
@@ -193,7 +191,7 @@ const displayChartHours = (view,forecastday) =>{
                             data: temps,
                             borderColor: 'rgba(255, 99, 132, 1)',
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            fill: false,
+                            fill: true,
                             tension: 0.1
                         }
                     ]
@@ -210,7 +208,6 @@ const displayChartHours = (view,forecastday) =>{
         })
     });
 }
-
 
 
 selectors.btn.addEventListener("click", () =>{
