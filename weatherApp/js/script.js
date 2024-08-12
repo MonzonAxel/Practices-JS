@@ -114,43 +114,40 @@ const displayChart = (data) => {
     
     const {forecast:{forecastday}} = data 
 
-        let labels = forecastday.map(day => getDayName(day.date));
+    let labels = forecastday.map(day => getDayName(day.date));
        
-        const maxTemps = forecastday.map(day => day.day.maxtemp_c);
+    const maxTemps = forecastday.map(day => day.day.maxtemp_c);
       
-        const minTemps = forecastday.map(day => day.day.mintemp_c);
+    const minTemps = forecastday.map(day => day.day.mintemp_c);
        
-
-        weatherChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Temperatura Máxima (°C)',
-                        data: maxTemps,
-                        borderColor: 'rgba(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132)',
-                    },
-                    {
-                        label: 'Temperatura Mínima (°C)',
-                        data: minTemps,
-                        borderColor: 'rgba(54, 162, 235)',
-                        backgroundColor: 'rgba(54, 162, 235)',
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: false
-                    }
+    weatherChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Temperatura Máxima (°C)',
+                    data: maxTemps,
+                    borderColor: 'rgba(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132)',
+                },
+                {
+                    label: 'Temperatura Mínima (°C)',
+                    data: minTemps,
+                    borderColor: 'rgba(54, 162, 235)',
+                    backgroundColor: 'rgba(54, 162, 235)',
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: false
                 }
             }
-        });
-    
+        }
+    });   
 }
-
 
 const displayChartHours = (view,forecastday) =>{
     view.forEach(element => {
