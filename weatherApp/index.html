@@ -9,30 +9,32 @@
 <body>
     <main class="wrapped">
         <section class="weather-top">
-            <div class="weather-img">
-                <img class="img" alt="Icon">
-                <p  class="temperature"></p>
-            </div>
-            <div class="weather-description">
-                <p class="description"></p>
-            </div>
-            <div class="weather-container-info">
-                <div class="weather-icon">
-                    <i class="fa-solid fa-earth-americas"></i>
-                    <i class="fa-solid fa-location-dot"></i>
-                    <i class="fa-solid fa-wind"></i>
-                    <i class="fa-solid fa-droplet"></i>
-                    <i class="fa-solid fa-cloud"></i>
-                    
+            <article class="weather-position">
+                <div class="weather-img">
+                    <img class="img" alt="Icon">
+                    <p  class="temperature"></p>
                 </div>
-                <div class="weather-info-text">
-                    <p class="weather-info-nation"></p>
-                    <p class="weather-info-region"></p>
-                    <p class="weather-info-wind"></p>
-                    <p class="weather-info-humidity"></p>
-                    <p class="weather-info-clouds"></p>
-                </div>  
-            </div>
+                <div class="weather-description">
+                    <p class="description"></p>
+                </div>
+                <div class="weather-container-info">
+                    <div class="weather-icon">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <i class="fa-solid fa-wind"></i>
+                        <i class="fa-solid fa-droplet"></i>
+                        <i class="fa-solid fa-cloud"></i>
+                
+                    </div>
+                    <div class="weather-info-text">
+                        <p class="weather-info-nation"></p>
+                        <p class="weather-info-region"></p>
+                        <p class="weather-info-wind"></p>
+                        <p class="weather-info-humidity"></p>
+                        <p class="weather-info-clouds"></p>
+                    </div>
+                </div>
+            </article>
         </section>
         <section class="weather-bottom">
             <p class="search-title">Busqueda:</p>
@@ -45,16 +47,16 @@
                 <!-- Insert into JS -->
             </div>
         </section>
+        <section class="myChart">
+            <canvas id="myChart"></canvas>
+        </section>
     </main>
     
 
-    <!-- <div class="myChart">
-        <canvas id="myChart"></canvas>
-    </div> -->
 
 
     <script src="https://kit.fontawesome.com/f3455718a3.js" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>
