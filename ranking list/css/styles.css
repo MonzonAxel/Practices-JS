@@ -73,6 +73,7 @@ img:not(.title){
         background-color: rgb(38, 36, 36);
         border: 1px solid;
         overflow: hidden;
+        transition: background-color 0.3s ease;
     }
 
     & span{
@@ -99,4 +100,8 @@ img:not(.title){
     align-items: flex-end;
     justify-content: flex-end;
     width: 100%;
+}
+
+.highlight{
+    background-color: white !important;
 }

@@ -9,6 +9,7 @@ let element
     container.addEventListener("dragend", dragEnd)
     container.addEventListener("drag", drag)
     container.addEventListener("dragover", dragOver)
+    container.addEventListener("dragleave", dragLeave)
     container.addEventListener("drop", drop)
 })
 
@@ -21,21 +22,35 @@ function dragEnd () {
     console.log("dragend")
 }
 
-function drag () {
-    console.log("haciendo drag")
-}
-
 function drop (e) {
     e.preventDefault()
     const element = document.getElementById(e.dataTransfer.getData("text"))
-    
+
     const container = e.target
 
-    if(container.classList.value === "tier-sort" || container.classList.value == "container-img"){
+    if(container.classList.contains("tier-sort") || container.classList.contains("container-img")){
         container.append(element)
     }
+    container.classList.remove("highlight")
 }
 
 function dragOver (e) {
     e.preventDefault()
+    const container = e.target
+    if(container.classList.contains("tier-sort")){
+        container.classList.add("highlight")
+    }
+}
+
+function drag(){
+    console.log("drag")
+}
+
+function dragLeave(e){
+
+    const container = e.target
+    if (container.classList.contains("tier-sort")) {
+        container.classList.remove("highlight")
+    }
+
 }
