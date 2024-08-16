@@ -32,7 +32,7 @@ img:not(.title){
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 528px;
+    max-width: 535px;
     margin: 0 auto;
 }
 
@@ -47,30 +47,36 @@ img:not(.title){
 .tierlist{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
 
     & .tier{
         display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        background-color: rgba(61, 56, 56, 0.4);
+        align-items: center;
+        width: 100%;
+        background-color: var(--level);
     }
 
     & .tier-name{
-        width: 66px;
+        width: 70px;
         height: 66px;
-        background-color: var(--level);
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: 600;
-        font-size: 1.25rem;
-        flex-wrap: wrap;
+        font-size: 0.8rem;
+        overflow: hidden;
+    }
+
+    & .tier-sort{
+        width: 100%;
+        min-height: 66px;
+        background-color: rgb(38, 36, 36);
+        border: 1px solid;
+        overflow: hidden;
     }
 
     & span{
-        
+        overflow: hidden;
         text-align: center;
     }
 }
