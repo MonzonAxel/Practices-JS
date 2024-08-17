@@ -27,14 +27,14 @@ function drag(e){
 
 }
 
-function drop (e) {
-    e.preventDefault()
-    const element = document.getElementById(e.dataTransfer.getData("text"))
-
+function drop(e) {
+    e.preventDefault();
+    
+    const element = document.getElementById(e.dataTransfer.getData("text"));
     const container = e.target.closest(".tier-sort, .container-img");
 
     if (container) {
-        const afterElement = getDragAfterElement(container, e.clientX);
+        const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
 
         if (afterElement == null) {
             container.appendChild(element);
@@ -47,8 +47,9 @@ function drop (e) {
     
 }
 
+
 function dragOver (e) {
-    e.preventDefault()
+    e.preventDefault();
     const container = e.target
     if(container.classList.contains("tier-sort")){
         container.classList.add("highlight")
@@ -57,7 +58,7 @@ function dragOver (e) {
 
 
 function dragLeave(e){
-
+    e.preventDefault();
     const container = e.target
     if (container.classList.contains("tier-sort")) {
         container.classList.remove("highlight")
@@ -65,20 +66,26 @@ function dragLeave(e){
 
 }
 
-function getDragAfterElement (container,x) {
+function getDragAfterElement(container, x, y) {
     const draggableElements = [...container.querySelectorAll('.img')];
-    console.log(`este es el draggable` + draggableElements)
-    
+    const containerRect = container.getBoundingClientRect();
+    const relativeX = x - containerRect.left;
+    const relativeY = y - containerRect.top;
+
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
-        const offset = x - box.left - box.width / 2;
+        const childTop = box.top - containerRect.top;
+        const childBottom = childTop + box.height;
+        const isSameRow = (relativeY >= childTop && relativeY <= childBottom);
 
-        console.log(offset)
-        
-        if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child };
-        } else {
-            return closest;
+        if (isSameRow) {
+            const childCenterX = box.left - containerRect.left + box.width / 2;
+            const offset = relativeX - childCenterX;
+
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            }
         }
+        return closest;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
