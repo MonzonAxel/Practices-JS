@@ -18,20 +18,33 @@ function dragStart (e) {
     e.dataTransfer.setData("text/plain" , e.target.id)
 }
 
-function dragEnd () {
+function dragEnd (e) {
     console.log("dragend")
+}
+
+function drag(e){
+    console.log("drag")
+
 }
 
 function drop (e) {
     e.preventDefault()
     const element = document.getElementById(e.dataTransfer.getData("text"))
 
-    const container = e.target
+    const container = e.target.closest(".tier-sort, .container-img");
 
-    if(container.classList.contains("tier-sort") || container.classList.contains("container-img")){
-        container.append(element)
+    if (container) {
+        const afterElement = getDragAfterElement(container, e.clientX);
+
+        if (afterElement == null) {
+            container.appendChild(element);
+        } else {
+            container.insertBefore(element, afterElement);
+        }
     }
+
     container.classList.remove("highlight")
+    
 }
 
 function dragOver (e) {
@@ -42,9 +55,6 @@ function dragOver (e) {
     }
 }
 
-function drag(){
-    console.log("drag")
-}
 
 function dragLeave(e){
 
@@ -53,4 +63,22 @@ function dragLeave(e){
         container.classList.remove("highlight")
     }
 
+}
+
+function getDragAfterElement (container,x) {
+    const draggableElements = [...container.querySelectorAll('.img')];
+    console.log(`este es el draggable` + draggableElements)
+    
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = x - box.left - box.width / 2;
+
+        console.log(offset)
+        
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
