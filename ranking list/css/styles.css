@@ -68,6 +68,8 @@ img:not(.title){
     }
 
     & .tier-sort{
+        display: flex;
+        flex-wrap: wrap;
         width: 100%;
         min-height: 66px;
         background-color: rgb(38, 36, 36);
@@ -91,7 +93,12 @@ img:not(.title){
     gap: 0.3rem;
 }
 
-#save-tier-button{
+.preview{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+#print-tier{
     background-color: black;
     margin-top: 1rem;
     color: white;
@@ -100,6 +107,7 @@ img:not(.title){
     align-items: flex-end;
     justify-content: flex-end;
     width: 100%;
+    cursor: pointer;
 }
 
 .highlight{

@@ -1,5 +1,6 @@
 const containerImg = document.querySelector(".container-img")
 const tierlist = document.querySelector(".tierlist")
+const tierPrint = document.querySelector("#print-tier")
 
 let element
 
@@ -30,7 +31,8 @@ function drag(e){
 function drop(e) {
     e.preventDefault();
     
-    const element = document.getElementById(e.dataTransfer.getData("text"));
+    element = document.getElementById(e.dataTransfer.getData("text"));
+
     const container = e.target.closest(".tier-sort, .container-img");
 
     if (container) {
@@ -56,7 +58,6 @@ function dragOver (e) {
     }
 }
 
-
 function dragLeave(e){
     e.preventDefault();
     const container = e.target
@@ -67,7 +68,7 @@ function dragLeave(e){
 }
 
 function getDragAfterElement(container, x, y) {
-    const draggableElements = [...container.querySelectorAll('.img')];
+    const draggableElements = [...container.querySelectorAll(".img")];
     const containerRect = container.getBoundingClientRect();
     const relativeX = x - containerRect.left;
     const relativeY = y - containerRect.top;
@@ -89,3 +90,21 @@ function getDragAfterElement(container, x, y) {
         return closest;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
+
+tierPrint.addEventListener("click", () => {
+    
+    const canvas = document.createElement("canvas")
+    const ctx = canvas.getContext("2d")
+
+    import("https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/+esm")
+    .then(({default: html2canvas}) => {
+        html2canvas(tierlist).then(canvas => {
+            ctx.drawImage(canvas, 0, 0)
+            const imgURL = canvas.toDataURL("image/png")
+            const downloadLink = document.createElement("a")
+            downloadLink.download = "tier.png"
+            downloadLink.href = imgURL
+            downloadLink.click()
+        })
+    })
+})
