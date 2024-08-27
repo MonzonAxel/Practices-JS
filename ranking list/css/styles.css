@@ -71,11 +71,11 @@ img:not(.title){
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        min-height: 66px;
+        min-height: 70px;
         background-color: rgb(38, 36, 36);
         border: 1px solid;
-        overflow: hidden;
         transition: background-color 0.3s ease;
+        gap: 0.5rem;
     }
 
     & span{
@@ -96,6 +96,7 @@ img:not(.title){
 .preview{
     opacity: 0.5;
     pointer-events: none;
+    transform: scale(0.9); /* Reducir ligeramente el tamaño de la vista previa */
 }
 
 .hidden{

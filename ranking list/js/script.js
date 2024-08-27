@@ -7,7 +7,6 @@ let element, preview, originalParent, originalNextSibling;
 [containerImg,tierlist].forEach(container => {
     container.addEventListener("dragstart" , dragStart)
     container.addEventListener("dragend", dragEnd)
-    container.addEventListener("drag", drag)
     container.addEventListener("dragover", dragOver)
     container.addEventListener("dragleave", dragLeave)
     container.addEventListener("drop", drop)
@@ -15,13 +14,10 @@ let element, preview, originalParent, originalNextSibling;
 
 
 function dragStart (e) {
-    e.dataTransfer.setData("text/plain" , e.target.id)
     element = document.getElementById(e.target.id); // La imagen que estás arrastrando
-
     // Guardar el contenedor original y el siguiente hermano
     originalParent = element.parentNode;
     originalNextSibling = element.nextSibling;
-
     // Ocultar el elemento original temporalmente
     setTimeout(() => {
         element.style.display = "none";
@@ -30,10 +26,9 @@ function dragStart (e) {
     // Crear la vista previa
     preview = element.cloneNode(true);
     preview.classList.add("preview");
-    preview.style.opacity = "0.5";  // Semitransparente
 }
 
-function dragEnd (e) {
+function dragEnd () {
     console.log("dragend")
 
     // Si no se hizo el drop, restaurar el elemento en su lugar original
@@ -49,11 +44,6 @@ function dragEnd (e) {
         preview.remove();
         preview = null;
     }
-}
-
-function drag(e){
-    console.log("drag")
-
 }
 
 function drop(e) {
@@ -105,16 +95,23 @@ function dragLeave(e){
     e.preventDefault();
     const container = e.target.closest(".tier-sort");
     if (container && container.classList.contains("tier-sort")) {
-        container.classList.remove("highlight")
-        if (preview) {
-            preview.remove(); // Eliminar la vista previa cuando el mouse sale
+        // Verifica si el mouse está fuera del contenedor real
+        const rect = container.getBoundingClientRect();
+        const isOutsideContainer = e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom;
+
+        // Solo quitar el highlight y la preview si el mouse realmente ha salido del contenedor
+        if (isOutsideContainer) {
+            container.classList.remove("highlight");
+            if (preview) {
+                preview.remove(); // Eliminar la vista previa cuando el mouse sale
+            }
         }
     }
 
 }
 
 function getDragAfterElement(container, x, y) {
-    const draggableElements = [...container.querySelectorAll(".img")];
+    const draggableElements = [...container.querySelectorAll(".img:not(.preview)")];
     const containerRect = container.getBoundingClientRect();
     const relativeX = x - containerRect.left;
     const relativeY = y - containerRect.top;
