@@ -16,7 +16,6 @@
 body{
     background-color: black;
     padding: 0.5rem;
-    user-select: none;
 }
 
 img:not(.title){
@@ -42,6 +41,7 @@ img:not(.title){
 
 .title{
     width: 300px;
+    pointer-events: none;
 }
 
 .tierlist{
@@ -96,6 +96,10 @@ img:not(.title){
 .preview{
     opacity: 0.5;
     pointer-events: none;
+}
+
+.hidden{
+    display: none;
 }
 
 #print-tier{
