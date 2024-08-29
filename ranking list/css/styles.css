@@ -40,7 +40,7 @@ img:not(.title){
 }
 
 .title{
-    width: 300px;
+    width: 260px;
     pointer-events: none;
 }
 
@@ -71,7 +71,7 @@ img:not(.title){
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        min-height: 70px;
+        min-height: 67px;
         background-color: rgb(38, 36, 36);
         border: 1px solid;
         transition: background-color 0.3s ease;
